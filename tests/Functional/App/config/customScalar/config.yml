@@ -1,0 +1,14 @@
+imports:
+    - { resource: ../config.yml }
+
+overblog_graphql:
+    definitions:
+        class_namespace: "Overblog\\GraphQLBundle\\CustomScalar\\__DEFINITIONS__"
+        schema:
+            query: Query
+            mutation: ~
+        mappings:
+            types:
+                -
+                    type: yaml
+                    dir: "%kernel.project_dir%/config/customScalar/mapping"

@@ -1,4 +1,0 @@
-Node:
-    type: relay-node
-    config:
-        resolveType: '@=resolver("node_resolver::typeResolver", [value])'

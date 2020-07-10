@@ -1,0 +1,17 @@
+imports:
+    - { resource: ../config.yml }
+    - { resource: services.yml }
+
+overblog_graphql:
+    definitions:
+        class_namespace: "Overblog\\GraphQLBundle\\Connection\\__DEFINITIONS__"
+        schema:
+            query: Query
+            mutation: ~
+        mappings:
+            types:
+                -
+                    type: yml
+                    dir: "%kernel.project_dir%/config/connection/mapping"
+    services:
+        promise_adapter: "overblog_graphql.react.promise_adapter"

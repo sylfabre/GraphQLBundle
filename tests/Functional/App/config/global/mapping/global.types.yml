@@ -1,0 +1,70 @@
+NodeInterface:
+    type: relay-node
+    config:
+        resolveType: '@=service("overblog_graphql.test.resolver.global").typeResolver(value)'
+
+Query:
+    type: object
+    config:
+        fields:
+            node:
+                builder: "Relay::Node"
+                builderConfig:
+                    nodeInterfaceType: NodeInterface
+                    idFetcher: '@=service("overblog_graphql.test.resolver.global").idFetcher(value)'
+            allObjects:
+                type: '[NodeInterface]'
+                resolve: '@=service("overblog_graphql.test.resolver.global").resolveAllObjects()'
+
+User:
+    type: object
+    config:
+        fields:
+            id:
+                builder: "Relay::GlobalId"
+            name: String
+        interfaces: [NodeInterface]
+
+Photo:
+    type: object
+    config:
+        fields:
+            id:
+                builder: "Relay::GlobalId"
+                builderConfig:
+                    typeName: Photo
+                    idFetcher: '@=value["photoId"]'
+            width: Int
+        interfaces: [NodeInterface]
+
+Post:
+    type: object
+    config:
+        fields:
+            id:
+                builder: "Relay::GlobalId"
+            text: String
+            status: Status
+        interfaces: [NodeInterface]
+
+PhotoAndPost:
+    type: union
+    config:
+        types: [Photo, Post]
+        resolveType: '@=service("overblog_graphql.test.resolver.global").typeResolver(value)'
+
+PhotoInput:
+    type: input-object
+    config:
+        fields:
+            width: { type: Int, defaultValue: 100 }
+
+Status:
+    type: enum
+    config:
+        values:
+            PUBLISHED: 1
+            DRAFT: 2
+            STANDBY:
+                value: 3
+                description: Waiting for validation

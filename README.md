@@ -2,6 +2,7 @@ OverblogGraphQLBundle
 ======================
 
 [![Build Status](https://travis-ci.org/overblog/GraphQLBundle.svg?branch=master)](https://travis-ci.org/overblog/GraphQLBundle)
+[![Build status](https://ci.appveyor.com/api/projects/status/7ksxlcgwt40q74hv/branch/master?svg=true)](https://ci.appveyor.com/project/overblog/graphqlbundle/branch/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/overblog/GraphQLBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/overblog/GraphQLBundle/?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/overblog/GraphQLBundle/badge.svg?branch=master)](https://coveralls.io/github/overblog/GraphQLBundle?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/overblog/graphql-bundle/version)](https://packagist.org/packages/overblog/graphql-bundle)
@@ -9,70 +10,86 @@ OverblogGraphQLBundle
 [![Total Downloads](https://poser.pugx.org/overblog/graphql-bundle/downloads)](https://packagist.org/packages/overblog/graphql-bundle)
 
 This Symfony bundle provides integration of [GraphQL](https://facebook.github.io/graphql/) using [webonyx/graphql-php](https://github.com/webonyx/graphql-php)
-and [GraphQL Relay](https://facebook.github.io/relay/docs/graphql-relay-specification.html).
+and [GraphQL Relay](https://facebook.github.io/relay/docs/en/graphql-server-specification.html).
 It also supports:
 * batching with [ReactRelayNetworkLayer](https://github.com/nodkz/react-relay-network-layer)
-* batching with [Apollo GraphQL](http://dev.apollodata.com/core/network.html#query-batching).
+* batching with [Apollo GraphQL](https://www.apollographql.com/docs/react/networking/network-layer/#query-batching)
 * upload and batching upload with [apollo-upload-client](https://github.com/jaydenseric/apollo-upload-client)
 
 Browse your version documentation:
 
-* [0.8  (OBSOLETE)](https://github.com/overblog/GraphQLBundle/blob/0.8/README.md)
-* [0.9  (OBSOLETE)](https://github.com/overblog/GraphQLBundle/blob/0.9/README.md)
-* [0.10 (STABLE)](https://github.com/overblog/GraphQLBundle/blob/0.10/README.md)
+* [1.0 (DEV)](https://github.com/overblog/GraphQLBundle/blob/master/README.md)
+* [0.13 (STABLE)](https://github.com/overblog/GraphQLBundle/blob/0.13/README.md)
+* [0.12 (STABLE)](https://github.com/overblog/GraphQLBundle/blob/0.12/README.md)
 * [0.11 (STABLE)](https://github.com/overblog/GraphQLBundle/blob/0.11/README.md)
-* [0.12 (DEV)](https://github.com/overblog/GraphQLBundle/blob/master/README.md)
+* [0.10 (OBSOLETE)](https://github.com/overblog/GraphQLBundle/blob/0.10/README.md)
+* [0.9  (OBSOLETE)](https://github.com/overblog/GraphQLBundle/blob/0.9/README.md)
+* [0.8  (OBSOLETE)](https://github.com/overblog/GraphQLBundle/blob/0.8/README.md)
 
-[Versions requirements](Resources/doc/index.md#versions-requirements)
+[Versions requirements](docs/index.md#versions-requirements)
+
+Proof of Concept
+-----------------
+
+* [mcg-web/graphql-symfony-doctrine-sandbox](https://github.com/mcg-web/graphql-symfony-doctrine-sandbox)
+* [michaelperrin/blog-graphql-upload-demo](https://github.com/michaelperrin/blog-graphql-upload-demo)
+* [overblog/GraphQLBundleDemo](https://github.com/overblog/GraphQLBundleDemo)
+* [Samffy/graphql-poc](https://github.com/Samffy/graphql-poc)
 
 Documentation
 -------------
 
-- [Quick start](Resources/doc/definitions/quick-start.md)
-- [Installation](Resources/doc/index.md)
-- [Definitions](Resources/doc/definitions/index.md)
-  - [Type System](Resources/doc/definitions/type-system/index.md)
-    - [Scalars](Resources/doc/definitions/type-system/scalars.md)
-    - [Object](Resources/doc/definitions/type-system/object.md)
-    - [Interface](Resources/doc/definitions/type-system/interface.md)
-    - [Union](Resources/doc/definitions/type-system/union.md)
-    - [Enum](Resources/doc/definitions/type-system/enum.md)
-    - [Input Object](Resources/doc/definitions/type-system/input-object.md)
-    - [Lists](Resources/doc/definitions/type-system/lists.md)
-    - [Non-Null](Resources/doc/definitions/type-system/non-null.md)
-  - [Type Inheritance](Resources/doc/definitions/type-inheritance.md)
-  - [GraphQL schema language](Resources/doc/definitions/graphql-schema-language.md)
-  - [Schema](Resources/doc/definitions/schema.md)
-  - [Resolver](Resources/doc/definitions/resolver.md)
-  - [Solving N+1 problem](Resources/doc/definitions/solving-n-plus-1-problem.md)
-  - [Mutation](Resources/doc/definitions/mutation.md)
-  - [Relay](Resources/doc/definitions/relay/index.md)
-    - [Connection](Resources/doc/definitions/relay/connection.md)
-      - [Relay Pagination helper](Resources/doc/helpers/relay-paginator.md)
-    - [Node](Resources/doc/definitions/relay/node/index.md)
-      - [Node](Resources/doc/definitions/relay/node/node.md)
-      - [Plural](Resources/doc/definitions/relay/node/plural.md)
-      - [Global id](Resources/doc/definitions/relay/node/global-id.md)
-    - [Mutation](Resources/doc/definitions/relay/mutation.md)
-  - [Builders](Resources/doc/definitions/builders/index.md)
-    - [Field Builder](Resources/doc/definitions/builders/field.md)
-    - [Args Builder](Resources/doc/definitions/builders/args.md)
-  - [Expression language](Resources/doc/definitions/expression-language.md)
-  - [Debug](Resources/doc/definitions/debug/index.md)
-  - [GraphiQL](Resources/doc/definitions/graphiql/index.md)
-  - [Upload files](Resources/doc/definitions/upload-files.md)
-- [Data fetching](Resources/doc/data-fetching/index.md)
-  - [Query batching](Resources/doc/data-fetching/batching.md)
-  - [Promise](Resources/doc/data-fetching/promise.md)
-- [Security](Resources/doc/security/index.md)
-  - [Handle CORS](Resources/doc/security/handle-cors.md)
-  - [Object access control](Resources/doc/security/object-access-control.md)
-  - [Fields access control](Resources/doc/security/fields-access-control.md)
-  - [Fields public control](Resources/doc/security/fields-public-control.md)
-  - [Limiting query depth](Resources/doc/security/limiting-query-depth.md)
-  - [Query complexity analysis](Resources/doc/security/query-complexity-analysis.md)
-- [Errors handling](Resources/doc/error-handling/index.md)
-- [Events](Resources/doc/events/index.md)
+- [Quick start](docs/definitions/quick-start.md)
+- [Installation](docs/index.md)
+- [Definitions](docs/definitions/index.md)
+  - [Type System](docs/definitions/type-system/index.md)
+    - [Scalars](docs/definitions/type-system/scalars.md)
+    - [Object](docs/definitions/type-system/object.md)
+    - [Interface](docs/definitions/type-system/interface.md)
+    - [Union](docs/definitions/type-system/union.md)
+    - [Enum](docs/definitions/type-system/enum.md)
+    - [Input Object](docs/definitions/type-system/input-object.md)
+    - [Lists](docs/definitions/type-system/lists.md)
+    - [Non-Null](docs/definitions/type-system/non-null.md)
+  - [Type Inheritance](docs/definitions/type-inheritance.md)
+  - [GraphQL schema language](docs/definitions/graphql-schema-language.md)
+  - [Schema](docs/definitions/schema.md)
+  - [Resolver](docs/definitions/resolver.md)
+  - [Experimental coroutine executor](docs/definitions/coroutine-executor.md)
+  - [Solving N+1 problem](docs/definitions/solving-n-plus-1-problem.md)
+  - [Mutation](docs/definitions/mutation.md)
+  - [Relay](docs/definitions/relay/index.md)
+    - [Connection](docs/definitions/relay/connection.md)
+      - [Relay Pagination helper](docs/helpers/relay-paginator.md)
+    - [Node](docs/definitions/relay/node/index.md)
+      - [Node](docs/definitions/relay/node/node.md)
+      - [Plural](docs/definitions/relay/node/plural.md)
+      - [Global id](docs/definitions/relay/node/global-id.md)
+    - [Mutation](docs/definitions/relay/mutation.md)
+  - [Builders](docs/definitions/builders/index.md)
+    - [Field Builder](docs/definitions/builders/field.md)
+    - [Fields Builder](docs/definitions/builders/fields.md)
+    - [Args Builder](docs/definitions/builders/args.md)
+  - [Expression language](docs/definitions/expression-language.md)
+  - [Debug](docs/definitions/debug/index.md)
+  - [GraphiQL](docs/definitions/graphiql/index.md)
+  - [Upload files](docs/definitions/upload-files.md)
+- [Data fetching](docs/data-fetching/index.md)
+  - [Query batching](docs/data-fetching/batching.md)
+  - [Promise](docs/data-fetching/promise.md)
+- [Annotations](docs/annotations/index.md)
+- [Validation](docs/validation/index.md)
+- [Security](docs/security/index.md)
+  - [Handle CORS](docs/security/handle-cors.md)
+  - [Object access control](docs/security/object-access-control.md)
+  - [Fields access control](docs/security/fields-access-control.md)
+  - [Fields public control](docs/security/fields-public-control.md)
+  - [Limiting query depth](docs/security/limiting-query-depth.md)
+  - [Query complexity analysis](docs/security/query-complexity-analysis.md)
+  - [Disable introspection](docs/security/disable_introspection.md)
+- [Errors handling](docs/error-handling/index.md)
+- [Events](docs/events/index.md)
+- [Profiler](docs/profiler/index.md)
 
 Talks and slides to help you start
 ----------------------------------
@@ -94,8 +111,9 @@ Talks and slides to help you start
 Community
 ---------
 
-* Get some support on [Symfony devs Slack](https://symfony.com/slack-invite)
+* Get support on [Symfony devs Slack](https://symfony.com/slack-invite)
   on the dedicated channel **overblog-graphql**.
+* Get support in Telegram group [Overblog GraphQL](https://t.me/overblog_graphql)
 * Follow us on [GitHub](https://github.com/overblog)
 
 Contributing

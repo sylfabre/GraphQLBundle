@@ -1,0 +1,24 @@
+imports:
+    - { resource: ../config.yml }
+
+services:
+    node_resolver:
+        class: Overblog\GraphQLBundle\Tests\Functional\App\Resolver\NodeResolver
+        tags:
+            - { name: "overblog_graphql.resolver", method: "typeResolver" }
+            - { name: "overblog_graphql.resolver", alias: "node_id_fetcher", method: "idFetcher" }
+            - { name: "overblog_graphql.resolver", alias: "resolve_photo_field", method: "resolvePhotoField" }
+
+overblog_graphql:
+    definitions:
+        class_namespace: "Overblog\\GraphQLBundle\\Node\\__DEFINITIONS__"
+        schema:
+            query: Query
+            mutation: ~
+            types: [User, Photo]
+        mappings:
+            auto_discover: true
+            types:
+                -
+                    dir: "%kernel.project_dir%/config/node/mapping"
+                    suffix: _type

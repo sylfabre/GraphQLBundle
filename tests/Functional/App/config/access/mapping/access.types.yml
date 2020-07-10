@@ -1,0 +1,112 @@
+RootQuery:
+    type: object
+    config:
+        fieldsDefaultAccess: true
+        fields:
+            user:
+                type: User
+                resolve: '@=resolver("query")'
+            youShallNotSeeThisUnauthenticated:
+                type: SecureField
+                access: '@=isFullyAuthenticated()'
+                resolve: '@=[]'
+
+Mutation:
+    type: object
+    config:
+        fields:
+            user:
+                access: '@=private_service.hasAccess()'
+                type: Human
+                resolve: '@=resolver("query")'
+
+Human:
+    type: interface
+    config:
+        fields:
+            name: String
+
+User:
+    type: object
+    config:
+        fieldsDefaultAccess: "@=isFullyAuthenticated()"
+        fields:
+            name: String
+            roles:
+                type: '[String]'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: ['ROLE_USER']
+            isEnabled:
+                # access as a promise
+                access: "@=resolver('promise', [args['hasAccess']])"
+                args:
+                    hasAccess: {type: Boolean!}
+                type: Boolean
+                resolve: true
+            friends:
+                # TODO(mcg-web): replace by strict equality after fix compilation expression language bug in sf 4.0
+                access: "@=object == 1"
+                type: friendConnection
+                argsBuilder: "Relay::Connection"
+                resolve: '@=resolver("friends", [value, args])'
+            friendsAsArray:
+                # TODO(mcg-web): replace by strict equality after fix compilation expression language bug in sf 4.0
+                access: "@=object != 2"
+                type: '[Int]'
+                resolve: [1, 2, 3]
+            forbidden:
+                access: false
+                type: String!
+        interfaces: [Human]
+        isTypeOf: true
+
+SecureField:
+    type: object
+    config:
+        fields:
+            secretValue:
+                type: String!
+                resolve: 'top secret'
+            youAreAuthenticated:
+                type: Boolean!
+                resolve: '@=isFullyAuthenticated()'
+
+friendConnection:
+    type: relay-connection
+    config:
+        nodeType: User
+        resolveNode: '@=resolver("node", [value])'
+        edgeFields:
+            friendshipTime:
+                type: String
+                resolve: "Yesterday"
+        connectionFields:
+            totalCount:
+                type: Int
+                resolve: '@=resolver("connection")'
+
+#Mutation
+RootMutation:
+    type: object
+    config:
+        fields:
+            simpleMutationWithThunkFields:
+                builder: "Relay::Mutation"
+                access: "@=hasRole('ROLE_ADMIN')"
+                builderConfig:
+                    inputType: simpleMutationWithThunkFieldsInput
+                    payloadType: simpleMutationWithThunkFieldsPayload
+                    mutateAndGetPayload: "@=mutation('simple_mutation_with_thunk_fields', [value])"
+
+simpleMutationWithThunkFieldsInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            inputData : "Int"
+
+simpleMutationWithThunkFieldsPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            # replace by strict equality after fix compilation expression language bug in sf 4.0
+            result: { type: "Int", access: "@=object == 123" }

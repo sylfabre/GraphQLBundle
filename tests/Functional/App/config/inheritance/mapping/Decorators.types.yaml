@@ -1,0 +1,101 @@
+QueryBarDecorator:
+    decorator: true
+    heirs: QueryBar
+    config:
+        interfaces: [QueryHelloWord]
+        fields:
+            bar: String
+
+QueryFooDecorator:
+    decorator: true
+    config:
+        fields:
+            period: Period
+
+A:
+    type: interface
+    config:
+        fields:
+            a: String
+
+AA:
+    type: interface
+    config:
+        fields:
+            aa: String
+
+B:
+    type: interface
+    config:
+        fields:
+            b: String
+
+C:
+    type: interface
+    config:
+        fields:
+            c: String
+
+D:
+    type: interface
+    config:
+        fields:
+            d: String
+
+E:
+    type: interface
+    config:
+        fields:
+            e: String
+
+DecoratorA:
+    type: object
+    decorator: true
+    config:
+        interfaces:
+            - A
+            - AA
+        fields:
+            a: String
+            aa: String
+
+DecoratorB:
+    type: object
+    decorator: true
+    config:
+        interfaces:
+            - B
+        fields:
+            b: String
+
+DecoratorC:
+    type: object
+    decorator: true
+    config:
+        interfaces:
+            - C
+        fields:
+            c: String
+
+DecoratorD:
+    type: object
+    decorator: true
+    inherits:
+        - DecoratorC
+    config:
+        interfaces:
+            - D
+        fields:
+            d: String
+
+ABCDE:
+    type: object
+    inherits:
+        - DecoratorA
+        - DecoratorB
+        - DecoratorD
+    config:
+        interfaces:
+            - E
+        fields:
+            e: String
